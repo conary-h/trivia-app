@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { useDarkMode } from 'hooks/useDarkMode';
+import { ThemeProvider } from 'styled-components';
+import { GlobalStyles } from 'styles/globalStyles';
+import { lightTheme, darkTheme } from 'styles/themes';
 import Home from 'features/Home';
+import Toggle from 'components/Toggle';
 
 function App() {
+  const [theme, themeToggler] = useDarkMode();
+  const themeMode = theme === 'light' ? lightTheme : darkTheme;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-      <Home />
-    </div>
+    <ThemeProvider theme={themeMode}>
+      <>
+        <GlobalStyles />
+        <Toggle toggleTheme={themeToggler} />
+        <BrowserRouter>
+          <Suspense fallback={false}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+            </Routes>
+          </Suspense>
+        </BrowserRouter>
+      </>
+    </ThemeProvider>
   );
 }
 

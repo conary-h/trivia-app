@@ -5,7 +5,9 @@
     "paths": {
       "features": ["./features"],
       "components": ["./components"],
-      "services": ["./services"]
+      "services": ["./services"],
+      "styles": ["./styles"],
+      "hooks": ["./hooks"]
     }
   }
 }
