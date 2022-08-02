@@ -1,7 +1,18 @@
+import { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { getAll } from './service/provider';
 
 function App() {
+  useEffect(() => {
+    async function fetch() {
+      const res = await getAll({ type: 'boolean', difficulty: 'hard', amount: 10 });
+
+      console.log(res);
+    }
+    fetch();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
