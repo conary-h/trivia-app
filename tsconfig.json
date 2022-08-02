@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "jsx": "preserve",
+    "paths": {
+      "features": ["./features"],
+      "components": ["./components"],
+      "services": ["./services"]
+    }
+  }
+}
