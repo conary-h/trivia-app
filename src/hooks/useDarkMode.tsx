@@ -8,7 +8,7 @@ export const useDarkMode = () => {
     setTheme(mode);
   };
 
-  const themeToggler = () => {
+  const toggleTheme = () => {
     theme === 'light' ? setMode('dark') : setMode('light');
   };
 
@@ -17,5 +17,5 @@ export const useDarkMode = () => {
     localTheme && setTheme(localTheme);
   }, []);
 
-  return [theme, themeToggler];
+  return [theme, toggleTheme];
 };
