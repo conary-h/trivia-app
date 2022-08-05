@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { getQuestions } from 'services/provider';
-import { Grid, Row, Col } from 'styles/globalStyles';
+import { getQuestionsByType } from 'services/provider';
+import { Grid, Row, Col } from 'react-flexbox-grid';
+import Button from 'components/Button';
 
 export default function Home() {
   useEffect(() => {
@@ -8,31 +9,25 @@ export default function Home() {
   }, []);
 
   const handleFetch = async () => {
-    const res = await getQuestions({ type: 'boolean', difficulty: 'hard', amount: 10 });
+    const res = await getQuestionsByType({ type: 'boolean', difficulty: 'hard', amount: 10 });
 
     console.log(res);
   };
   return (
     <Grid>
       <Row>
-        <Col size={12}>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi magni aut officiis,
-            laborum minima a quam amet qui veritatis in, totam, veniam incidunt corrupti rerum
-            voluptas magnam? Nihil reprehenderit quae nam sint ullam tempora perferendis amet
-            nostrum, excepturi architecto deserunt ad perspiciatis sunt odit, reiciendis est porro
-            consequuntur numquam ipsum?
-          </p>
+        <Col xs={12}>
+          <h1>Welcome to the Trivia Challenge!</h1>
         </Col>
-        <Col size={5}>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quasi magni aut officiis,
-            laborum minima a quam amet qui veritatis in, totam, veniam incidunt corrupti rerum
-            voluptas magnam? Nihil reprehenderit quae nam sint ullam tempora perferendis amet
-            nostrum, excepturi architecto deserunt ad perspiciatis sunt odit, reiciendis est porro
-            consequuntur numquam ipsum?
-          </p>
+        <Col xs={12}>
+          <h2>You will be presented with 10 True or False questions</h2>
         </Col>
+        <Col xs={12}>
+          <h2>Can you score 100%?</h2>
+        </Col>
+      </Row>
+      <Row>
+        <Button text="BEGIN!" />
       </Row>
     </Grid>
   );

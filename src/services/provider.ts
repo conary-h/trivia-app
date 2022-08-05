@@ -13,7 +13,7 @@ type getQuestionsTypes = {
   amount: number;
 };
 
-export const getQuestions = ({
+export const getQuestionsByType = ({
   type = 'boolean',
   difficulty = 'easy',
   amount = 20
