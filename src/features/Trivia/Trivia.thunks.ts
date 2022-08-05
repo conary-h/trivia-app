@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getQuestionsByType } from 'services/provider';
+import { getQuestions } from 'services/provider';
 
 type getQuestionsTypes = {
   type: string;
@@ -7,19 +7,17 @@ type getQuestionsTypes = {
   amount: number;
 };
 
-export const getQuestions = createAsyncThunk(
-  'trivia/getQuestions',
+export const getQuestionsByType = createAsyncThunk(
+  'trivia/getQuestionsByType',
   async ({ type, difficulty, amount }: getQuestionsTypes, { rejectWithValue }) => {
     try {
-      const { data, status } = await getQuestionsByType({
+      const results = await getQuestions({
         type,
         difficulty,
         amount
       });
 
-      if (status === 200) {
-        return data;
-      }
+      return results;
     } catch (err) {
       return rejectWithValue(err);
     }

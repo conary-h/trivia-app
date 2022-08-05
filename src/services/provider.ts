@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { handleResponse, handleError } from './response';
+import { gameDifficulty, questionTypes } from 'utils/constants';
 
 const BASE_URL = 'https://opentdb.com/api.php';
 
@@ -13,9 +14,9 @@ type getQuestionsTypes = {
   amount: number;
 };
 
-export const getQuestionsByType = ({
-  type = 'boolean',
-  difficulty = 'easy',
+export const getQuestions = ({
+  type = questionTypes.BOOLEAN,
+  difficulty = gameDifficulty.EASY,
   amount = 20
 }: getQuestionsTypes) => {
   return axios

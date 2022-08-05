@@ -1,13 +1,9 @@
 export function handleResponse(response) {
-  if (response.results) {
-    return response.results;
-  }
+  const { data, status } = response;
 
-  if (response.data) {
-    return response.data;
+  if (status === 200) {
+    return data.results;
   }
-
-  return response;
 }
 
 export function handleError(error) {

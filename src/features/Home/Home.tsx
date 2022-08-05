@@ -1,18 +1,29 @@
 import { useEffect } from 'react';
-import { getQuestionsByType } from 'services/provider';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Button from 'components/Button';
+import { getQuestionsByType } from '../Trivia/Trivia.thunks';
+import { gameDifficulty, questionTypes } from 'utils/constants';
 
 export default function Home() {
+  const dispatch: AppDispatch = useDispatch();
+
+  const fetchQuestions = async () => {
+    await dispatch(
+      getQuestionsByType({
+        type: questionTypes.BOOLEAN,
+        difficulty: gameDifficulty.HARD,
+        amount: 10
+      })
+    );
+  };
+
   useEffect(() => {
-    handleFetch();
+    fetchQuestions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handleFetch = async () => {
-    const res = await getQuestionsByType({ type: 'boolean', difficulty: 'hard', amount: 10 });
-
-    console.log(res);
-  };
   return (
     <Grid>
       <Row>

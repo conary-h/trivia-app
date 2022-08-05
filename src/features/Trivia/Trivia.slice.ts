@@ -1,31 +1,32 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getQuestions } from './Trivia.thunks';
+import { getQuestionsByType } from './Trivia.thunks';
 
 export const triviaSlice = createSlice({
   name: 'trivia',
   initialState: {
     status: 'idle',
     error: null,
-    questions: { current: 0 },
+    questions: {},
     undoStack: {}
   },
   reducers: {
     setCurrentQuestion({ questions }, { payload }) {
-      questions.current = payload;
+      questions = payload;
     }
   },
   extraReducers: (builder) =>
     builder
-
-      .addCase(getQuestions.pending, (state) => {
+      .addCase(getQuestionsByType.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(getQuestions.fulfilled, (state, { payload }) => {
+      .addCase(getQuestionsByType.fulfilled, (state, { payload }) => {
         state.status = 'done';
+
+        console.log('[ayload', payload);
 
         state.questions = payload;
       })
-      .addCase(getQuestions.rejected, (state) => {
+      .addCase(getQuestionsByType.rejected, (state) => {
         state.status = 'rejected';
       })
 });
