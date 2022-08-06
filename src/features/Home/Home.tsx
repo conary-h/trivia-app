@@ -1,29 +1,9 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../store';
 import { Grid, Row, Col } from 'react-flexbox-grid';
+import { useTheme } from 'styled-components';
 import Button from 'components/Button';
-import { getQuestionsByType } from '../Trivia/Trivia.thunks';
-import { gameDifficulty, questionTypes } from 'utils/constants';
 
 export default function Home() {
-  const dispatch: AppDispatch = useDispatch();
-
-  const fetchQuestions = async () => {
-    await dispatch(
-      getQuestionsByType({
-        type: questionTypes.BOOLEAN,
-        difficulty: gameDifficulty.HARD,
-        amount: 10
-      })
-    );
-  };
-
-  useEffect(() => {
-    fetchQuestions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  const theme = useTheme();
   return (
     <Grid>
       <Row>
@@ -38,7 +18,11 @@ export default function Home() {
         </Col>
       </Row>
       <Row>
-        <Button text="BEGIN!" />
+        <Button
+          text="BEGIN!"
+          bg={theme.colors.emerald as string}
+          color={theme.colors.white as string}
+        />
       </Row>
     </Grid>
   );

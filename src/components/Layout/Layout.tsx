@@ -12,11 +12,16 @@ const Layout = ({ children }) => {
   const [theme, toggleTheme] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
+  const handleToggleClick = () => {
+    toggleTheme();
+  };
+  console.log('Layout themeMode', themeMode);
+
   return (
     <Wrapper>
       <Provider store={store}>
         <ThemeProvider theme={themeMode}>
-          <Toggle toggleTheme={toggleTheme} />
+          <Toggle toggleTheme={handleToggleClick} checked={theme === 'dark'} />
           <GlobalStyles />
 
           <main>{children}</main>

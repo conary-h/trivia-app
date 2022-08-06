@@ -1,11 +1,17 @@
-import { Button } from './Toggle.styles';
+import { CheckBoxWrapper, CheckBox, CheckBoxLabel } from './Toggle.styles';
 
 type ToggleProps = {
-  toggleTheme: string | (() => void);
+  toggleTheme: () => void;
+  checked?: boolean;
 };
 
-const Toggle = ({ toggleTheme }: ToggleProps) => {
-  return <Button onClick={toggleTheme}>Switch Theme</Button>;
+const Toggle = ({ toggleTheme, checked }: ToggleProps) => {
+  return (
+    <CheckBoxWrapper>
+      <CheckBox id="checkbox" type="checkbox" onClick={toggleTheme} checked={checked} />
+      <CheckBoxLabel htmlFor="checkbox" />
+    </CheckBoxWrapper>
+  );
 };
 
 export default Toggle;
