@@ -3,15 +3,14 @@ import { Grid, Row } from 'react-flexbox-grid';
 import { useTheme } from 'styled-components';
 import Button from 'components/Button';
 
-import { Title, SubTitle } from 'styles/globalStyles';
-import { Wrapper } from './Home.styles';
+import { Title, SubTitle, Wrapper } from 'styles/globalStyles';
 
 export default function Home() {
   const theme = useTheme();
   const navigate = useNavigate();
 
   const handleBeginButtonClick = () => {
-    navigate('/trivia');
+    navigate('/game');
   };
 
   return (

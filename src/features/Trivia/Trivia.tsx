@@ -1,11 +1,14 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'store';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from 'store';
+import { Grid, Row } from 'react-flexbox-grid';
 import { getQuestionsByType } from '../Trivia/Trivia.thunks';
 import { gameDifficulty, questionTypes } from 'utils/constants';
+import { Title, Wrapper } from 'styles/globalStyles';
 
 export default function Trivia() {
   const dispatch: AppDispatch = useDispatch();
+  const { questions, currentQuestionIndex } = useSelector((state: RootState) => state.trivia);
 
   const fetchQuestions = async () => {
     await dispatch(
@@ -22,5 +25,11 @@ export default function Trivia() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div>Trivia</div>;
+  return (
+    <Wrapper fluid as={Grid}>
+      <Row>
+        <Title>{questions[currentQuestionIndex]?.category}</Title>
+      </Row>
+    </Wrapper>
+  );
 }

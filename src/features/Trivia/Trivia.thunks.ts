@@ -11,13 +11,13 @@ export const getQuestionsByType = createAsyncThunk(
   'trivia/getQuestionsByType',
   async ({ type, difficulty, amount }: getQuestionsTypes, { rejectWithValue }) => {
     try {
-      const results = await getQuestions({
+      const { data } = await getQuestions({
         type,
         difficulty,
         amount
       });
 
-      return results;
+      return data?.results;
     } catch (err) {
       return rejectWithValue(err);
     }

@@ -1,7 +1,8 @@
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
-import { GlobalStyles } from 'styles/globalStyles';
+import { GlobalStyles, Text } from 'styles/globalStyles';
 import Toggle from 'components/Toggle';
+import { Row } from 'react-flexbox-grid';
 
 import { useDarkMode } from 'hooks/useDarkMode';
 import { Wrapper } from './Layout.styles';
@@ -20,7 +21,12 @@ const Layout = ({ children }) => {
     <Wrapper>
       <Provider store={store}>
         <ThemeProvider theme={themeMode}>
-          <Toggle toggleTheme={handleToggleClick} defaultChecked={theme === 'dark'} />
+          <Row end="xs" middle="xs">
+            <Text $fontSize="1.2rem" $fontWeight="500" style={{ marginRight: '.8rem' }}>
+              Change theme!
+            </Text>
+            <Toggle toggleTheme={handleToggleClick} defaultChecked={theme === 'dark'} />
+          </Row>
           <GlobalStyles />
 
           <main>{children}</main>
