@@ -2,13 +2,18 @@ import { CheckBoxWrapper, CheckBox, CheckBoxLabel } from './Toggle.styles';
 
 type ToggleProps = {
   toggleTheme: () => void;
-  checked?: boolean;
+  defaultChecked?: boolean;
 };
 
-const Toggle = ({ toggleTheme, checked }: ToggleProps) => {
+const Toggle = ({ toggleTheme, defaultChecked }: ToggleProps) => {
   return (
     <CheckBoxWrapper>
-      <CheckBox id="checkbox" type="checkbox" onClick={toggleTheme} checked={checked} />
+      <CheckBox
+        id="checkbox"
+        type="checkbox"
+        onClick={toggleTheme}
+        defaultChecked={defaultChecked}
+      />
       <CheckBoxLabel htmlFor="checkbox" />
     </CheckBoxWrapper>
   );

@@ -1,6 +1,9 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyles = createGlobalStyle`
+  html {
+    font-size: 10px;
+  }
   body {
     background: ${({ theme }) => theme.colors.body};
     color: ${({ theme }) => theme.colors.text};
@@ -11,3 +14,12 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
   }
   `;
+
+export const Title = styled.h1`
+  font-size: 3rem;
+`;
+
+export const SubTitle = styled.p`
+  font-size: 2.6rem;
+  font-weight: 500;
+`;

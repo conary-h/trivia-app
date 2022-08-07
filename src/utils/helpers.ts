@@ -1,3 +1,11 @@
+import { isBoolean } from 'lodash';
+
 export const sanitizeBoolean = (value: string) => {
-  return value.toLowerCase() === 'True';
+  if (!value) {
+    throw new Error('Empty value');
+  }
+  if (isBoolean(value)) {
+    return value;
+  }
+  return value.toLowerCase() === 'true';
 };

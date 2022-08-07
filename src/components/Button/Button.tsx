@@ -4,11 +4,12 @@ type ButtonProps = {
   color?: string;
   text: string;
   bg?: string;
+  onClick: () => void;
 };
 
-export default function Button({ color, text, bg }: ButtonProps) {
+export default function Button({ color, text, bg, onClick }: ButtonProps) {
   return (
-    <ButtonWrapper color={color} bg={bg} role="button">
+    <ButtonWrapper onClick={onClick} color={color} bg={bg} role="button">
       {text}
     </ButtonWrapper>
   );
