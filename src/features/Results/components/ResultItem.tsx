@@ -1,6 +1,7 @@
 import { useTheme } from 'styled-components';
-import { Text } from 'styles/globalStyles';
-import { ItemWrapper } from '../Results.styles';
+import { ItemWrapper, StatusIcon, QuestionText } from '../Results.styles';
+import { Check, Minus } from 'react-feather';
+import { Col, Row } from 'react-flexbox-grid';
 
 type Question = {
   question: string;
@@ -20,9 +21,19 @@ export default function ResultItem({ item }: ResultItemProps) {
 
   return (
     <ItemWrapper>
-      <Text fontSize="2.2rem" fontWeight="bold" color={color as string}>
-        {question}
-      </Text>
+      <Row middle="xs">
+        <Col xs={1} style={{ textAlign: 'center' }}>
+          {isCorrectAnswer ? (
+            <StatusIcon as={Check} color={color as string} />
+          ) : (
+            <StatusIcon as={Minus} color={color as string} />
+          )}
+        </Col>
+
+        <Col xs={11}>
+          <QuestionText fontWeight="bold">{question}</QuestionText>
+        </Col>
+      </Row>
     </ItemWrapper>
   );
 }
