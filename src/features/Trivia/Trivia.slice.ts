@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { v4 as uuidv4 } from 'uuid';
+import { decode } from 'html-entities';
 import { getQuestionsByType } from './Trivia.thunks';
 import { sanitizeBoolean } from 'utils/helpers';
 
@@ -7,13 +9,26 @@ export const triviaSlice = createSlice({
   initialState: {
     status: 'idle',
     error: null,
-    questions: {},
+    questions: [],
     undoStack: {},
-    currentQuestionIndex: 0
+    currentQuestionIndex: 0,
+    totalQuestionsCount: 0,
+    correctAnswersCount: 0
   },
   reducers: {
-    setCurrentQuestion({ questions }, { payload }) {
-      questions = payload;
+    setAnswer(state, { payload }) {
+      const { answer } = payload;
+      const { questions, currentQuestionIndex } = state;
+      const currentQuestion = questions[currentQuestionIndex];
+
+      if (answer === currentQuestion?.correct_answer) {
+        state.correctAnswersCount = state.correctAnswersCount + 1;
+      }
+
+      currentQuestion.picked_answer = answer;
+    },
+    setQuestionIndex(state, { payload }) {
+      state.currentQuestionIndex = payload;
     }
   },
   extraReducers: (builder) =>
@@ -25,17 +40,20 @@ export const triviaSlice = createSlice({
         state.status = 'done';
 
         payload.forEach((question) => {
+          question.id = uuidv4();
+          question.question = decode(question.question);
           question.correct_answer = sanitizeBoolean(question.correct_answer);
           question.incorrect_answers = sanitizeBoolean(question.incorrect_answers[0]);
         });
 
         state.questions = payload;
+        state.totalQuestionsCount = payload.length;
       })
       .addCase(getQuestionsByType.rejected, (state) => {
         state.status = 'rejected';
       })
 });
 
-export const { setCurrentQuestion } = triviaSlice.actions;
+export const { setAnswer, setQuestionIndex } = triviaSlice.actions;
 
 export default triviaSlice.reducer;

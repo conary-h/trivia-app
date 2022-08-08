@@ -9,7 +9,11 @@ import { Wrapper } from './Layout.styles';
 import { lightTheme, darkTheme } from 'styles/themes';
 import { store } from '../../store';
 
-const Layout = ({ children }) => {
+type LayoutProps = {
+  children: JSX.Element;
+};
+
+const Layout = ({ children }: LayoutProps) => {
   const [theme, toggleTheme] = useDarkMode();
   const themeMode = theme === 'light' ? lightTheme : darkTheme;
 
@@ -22,7 +26,7 @@ const Layout = ({ children }) => {
       <Provider store={store}>
         <ThemeProvider theme={themeMode}>
           <Row end="xs" middle="xs">
-            <Text $fontSize="1.2rem" $fontWeight="500" style={{ marginRight: '.8rem' }}>
+            <Text fontSize="1.2rem" fontWeight="500" style={{ marginRight: '.8rem' }}>
               Change theme!
             </Text>
             <Toggle toggleTheme={handleToggleClick} defaultChecked={theme === 'dark'} />

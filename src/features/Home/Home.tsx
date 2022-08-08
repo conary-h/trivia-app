@@ -14,7 +14,7 @@ export default function Home() {
   };
 
   return (
-    <Wrapper fluid as={Grid}>
+    <Wrapper fluid as={Grid} style={{ justifyContent: 'space-between' }}>
       <Row>
         <Title>
           Welcome to the <br />

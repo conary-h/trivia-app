@@ -8,3 +8,5 @@ export const questionTypes = {
   MULTIPLE: 'multiple',
   BOOLEAN: 'boolean'
 };
+
+export const AMOUNT_OF_QUESTIONS = 10;

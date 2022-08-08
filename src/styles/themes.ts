@@ -14,7 +14,8 @@ const sharedStyles = {
   colors: {
     gray: '#bebebe',
     emerald: '#4fbe79',
-    white: '#fff'
+    white: '#fff',
+    warning: '#D31E1E'
   }
 };
 

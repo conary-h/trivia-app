@@ -25,21 +25,22 @@ export const SubTitle = styled.p`
 `;
 
 type TextProps = {
-  $fontSize?: string;
-  $fontStyle?: string;
-  $fontWeight?: string;
+  fontSize?: string;
+  fontStyle?: string;
+  fontWeight?: string;
+  color?: string;
 };
 
 export const Text = styled.span<TextProps>`
-  font-size: ${({ $fontSize }) => $fontSize};
-  font-style: ${({ $fontStyle }) => $fontStyle};
-  font-weight: ${({ $fontWeight }) => $fontWeight};
+  font-size: ${({ fontSize }) => fontSize};
+  font-style: ${({ fontStyle }) => fontStyle};
+  font-weight: ${({ fontWeight }) => fontWeight};
+  color: ${({ color }) => color};
 `;
 
 export const Wrapper = styled.div`
   text-align: center;
   flex-direction: column;
-  justify-content: space-between;
   display: flex;
   height: 500px;
   align-items: center;
