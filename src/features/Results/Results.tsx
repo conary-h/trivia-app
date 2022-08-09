@@ -1,4 +1,5 @@
-import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Grid, Row } from 'react-flexbox-grid';
 import { useTheme } from 'styled-components';
@@ -6,19 +7,21 @@ import { useTheme } from 'styled-components';
 import Button from 'components/Button';
 import ResultList from './components/ResultList';
 
-import { RootState } from 'store';
-import { useEffect } from 'react';
+import { RootState, AppDispatch } from 'store';
+import { resetGameState } from 'features/Trivia/Trivia.slice';
 import { Wrapper, Title } from 'styles/globalStyles';
 import { isEmpty } from 'lodash';
 
 export default function Results() {
   const theme = useTheme();
+  const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
   const { questions, totalQuestionsCount, correctAnswersCount } = useSelector(
     (state: RootState) => state.trivia
   );
 
   const handlePlayAgainClick = () => {
+    dispatch(resetGameState());
     navigate('/');
   };
 

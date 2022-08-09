@@ -4,9 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from 'store';
 import { Grid, Row } from 'react-flexbox-grid';
+import { isEmpty } from 'lodash';
 
 import Card from 'components/Card';
 import Button from 'components/Button';
+import Skeleton from 'components/Skeleton';
 
 import { gameDifficulty, questionTypes, AMOUNT_OF_QUESTIONS } from 'utils/constants';
 import { getQuestionsByType } from '../Trivia/Trivia.thunks';
@@ -18,7 +20,9 @@ export default function Trivia() {
   const theme = useTheme();
   const dispatch: AppDispatch = useDispatch();
   const navigate = useNavigate();
-  const { questions, currentQuestionIndex } = useSelector((state: RootState) => state.trivia);
+  const { questions, currentQuestionIndex, status } = useSelector(
+    (state: RootState) => state.trivia
+  );
   const currentQuestion = questions[currentQuestionIndex];
   const totalQuestions = questions.length;
 
@@ -49,34 +53,43 @@ export default function Trivia() {
   }, []);
 
   return (
-    <Wrapper fluid as={Grid}>
-      <Row>
-        <Title>{currentQuestion?.category}</Title>
-      </Row>
-      <Row>
-        <Card style={{ marginTop: '7rem', marginBottom: '4rem' }}>
-          <Text fontSize="2rem" fontWeight="500">
-            {currentQuestion?.question}
-          </Text>
-        </Card>
-      </Row>
-      <ButtonsRow as={Row}>
-        <Button
-          text="TRUE"
-          color={theme.colors.emerald as string}
-          border={`1px dashed ${theme.colors.text}`}
-          onClick={() => handleSubmit(true)}
-        />
-        <Button
-          text="FALSE"
-          color={theme.colors.warning as string}
-          border={`1px dashed ${theme.colors.text}`}
-          onClick={() => handleSubmit(false)}
-        />
-      </ButtonsRow>
-      <Row>
-        <QuestionsCount>{`${currentQuestionIndex + 1} /${totalQuestions}`}</QuestionsCount>
-      </Row>
-    </Wrapper>
+    <>
+      {status === 'loading' && (
+        <Row>
+          <Skeleton variant="card" />
+        </Row>
+      )}
+      {!isEmpty(questions) && (
+        <Wrapper fluid as={Grid}>
+          <Row>
+            <Title>{currentQuestion?.category}</Title>
+          </Row>
+          <Row>
+            <Card style={{ marginTop: '7rem', marginBottom: '4rem' }}>
+              <Text fontSize="2rem" fontWeight="500">
+                {currentQuestion?.question}
+              </Text>
+            </Card>
+          </Row>
+          <ButtonsRow as={Row}>
+            <Button
+              text="TRUE"
+              color={theme.colors.emerald as string}
+              border={`1px dashed ${theme.colors.text}`}
+              onClick={() => handleSubmit(true)}
+            />
+            <Button
+              text="FALSE"
+              color={theme.colors.warning as string}
+              border={`1px dashed ${theme.colors.text}`}
+              onClick={() => handleSubmit(false)}
+            />
+          </ButtonsRow>
+          <Row>
+            <QuestionsCount>{`${currentQuestionIndex + 1} /${totalQuestions}`}</QuestionsCount>
+          </Row>
+        </Wrapper>
+      )}
+    </>
   );
 }

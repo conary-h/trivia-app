@@ -15,7 +15,9 @@ const sharedStyles = {
     gray: '#bebebe',
     emerald: '#4fbe79',
     white: '#fff',
-    warning: '#D31E1E'
+    warning: '#D31E1E',
+    lightGray: '#f5f5f5',
+    brightGray: '#EEEEEE'
   }
 };
 

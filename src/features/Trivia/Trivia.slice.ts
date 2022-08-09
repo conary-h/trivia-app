@@ -29,6 +29,12 @@ export const triviaSlice = createSlice({
     },
     setQuestionIndex(state, { payload }) {
       state.currentQuestionIndex = payload;
+    },
+    resetGameState(state) {
+      state.questions = [];
+      state.currentQuestionIndex = 0;
+      state.totalQuestionsCount = 0;
+      state.correctAnswersCount = 0;
     }
   },
   extraReducers: (builder) =>
@@ -54,6 +60,6 @@ export const triviaSlice = createSlice({
       })
 });
 
-export const { setAnswer, setQuestionIndex } = triviaSlice.actions;
+export const { setAnswer, setQuestionIndex, resetGameState } = triviaSlice.actions;
 
 export default triviaSlice.reducer;

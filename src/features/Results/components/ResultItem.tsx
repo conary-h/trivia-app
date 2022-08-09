@@ -17,17 +17,14 @@ export default function ResultItem({ item }: ResultItemProps) {
   const theme = useTheme();
   const { question, correct_answer, picked_answer } = item;
   const isCorrectAnswer = correct_answer === picked_answer;
+  const icon = isCorrectAnswer ? Check : Minus;
   const color = isCorrectAnswer ? theme.colors.emerald : theme.colors.warning;
 
   return (
     <ItemWrapper>
       <Row middle="xs">
         <Col xs={1} style={{ textAlign: 'center' }}>
-          {isCorrectAnswer ? (
-            <StatusIcon as={Check} color={color as string} />
-          ) : (
-            <StatusIcon as={Minus} color={color as string} />
-          )}
+          <StatusIcon as={icon} color={color as string} />
         </Col>
 
         <Col xs={11}>
